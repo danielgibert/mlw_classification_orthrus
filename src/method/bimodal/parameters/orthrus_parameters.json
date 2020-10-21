@@ -1,0 +1,30 @@
+{
+  "bytes": {
+    "seq_length":2000000,
+    "V": 259,
+    "E": 4,
+    "conv": {
+      "num_filters": 100,
+      "size": [
+        3,
+        5,
+        7
+      ]
+    }
+  },
+  "opcodes": {
+      "seq_length":50000,
+      "V": 461,
+      "E": 4,
+      "conv":{
+        "num_filters": 100,
+        "size":[3,5,7]
+      }
+  },
+  "output":9,
+  "buffer_size": 1000,
+  "batch_size":1,
+  "epochs":40,
+  "learning_rate":0.005,
+  "gpu":"0"
+}
