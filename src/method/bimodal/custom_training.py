@@ -27,9 +27,12 @@ if __name__ == "__main__":
     parser.add_argument("parameters",
                         type=str,
                         help="JSON file containing the parameters of the model")
-    parser.add_argument("vocabulary_mapping_filepath",
+    parser.add_argument("opcodes_vocabulary_mapping_filepath",
                         type=str,
                         help="Filepath describing the vocabulary mapping between mnemonics and IDs")
+    parser.add_argument("bytes_vocabulary_mapping_filepath",
+                        type=str,
+                        help="Filepath describing the vocabulary mapping between bytes and IDs")
     parser.add_argument("--test_tfrecord",
                         type=str,
                         help="Testing TFRecord file",
@@ -75,11 +78,11 @@ if __name__ == "__main__":
     optimizer = tf.keras.optimizers.Adam(learning_rate=parameters['learning_rate'])
 
 
-    def train_loop(features, labels, training=False):
+    def train_loop(opcodes, bytes, labels, training=False):
         # Define the GradientTape context
         with tf.GradientTape() as tape:
             # Get the probabilities
-            predictions = model(features, training)
+            predictions = model(opcodes, bytes, training)
             #labels = tf.dtypes.cast(labels, tf.float32)
             # Calculate the loss
             loss = loss_func(labels, predictions)

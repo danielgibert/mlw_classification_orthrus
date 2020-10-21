@@ -12,7 +12,7 @@ from src.method.utils import create_lookup_table
 from sklearn.metrics import confusion_matrix
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Shallow CNN Model Training')
+    parser = argparse.ArgumentParser(description='Bytes Model Training')
     parser.add_argument("model",
                         type=str,
                         help="Model name")

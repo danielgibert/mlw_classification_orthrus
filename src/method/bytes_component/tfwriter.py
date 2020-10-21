@@ -26,16 +26,10 @@ def dataset_to_tfrecords(pe_filepath,
         for row in reader:
             print("{};{}".format(i, row['Id']))
             metaPHOR = MetaPHOR(pe_filepath + row['Id'] + ".asm")
-            bytes_sequence = []
-            instructions = metaPHOR.source_code.x86_instructions
-
-            for instruction in instructions:
-                if instruction.hex_sequence is not None:
-                    for hex_val in instruction.hex_sequence:
-                        if hex_val in vocabulary_mapping.keys():
-                            bytes_sequence.append(hex_val)
-                        else:
-                            bytes_sequence.append("UNK")
+            bytes_sequence = metaPHOR.get_hexadecimal_data_as_list()
+            for i in range(len(bytes_sequence)):
+                if bytes_sequence[i] not in vocabulary_mapping.keys():
+                    bytes_sequence[i] = "UNK"
 
             if len(bytes_sequence) < max_bytes:
                 while len(bytes_sequence) < max_bytes:
